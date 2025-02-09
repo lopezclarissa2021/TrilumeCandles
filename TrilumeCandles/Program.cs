@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using TrilumeCandles.Data;
+using Microsoft.AspNetCore.Identity;
+using TrilumeCandles.Areas.Identity.Data;
 
 namespace TrilumeCandles
 {
@@ -10,7 +12,14 @@ namespace TrilumeCandles
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<TrilumeCandlesContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("TrilumeCandlesContext") ?? throw new InvalidOperationException("Connection string 'TrilumeCandlesContext' not found.")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("TrilumeCandlesContext") ?? throw new InvalidOperationException("Connection string 'TrilumeCandlesContext' not found.")));
+
+            builder.Services.AddDbContext<TrilumeCandlesIdentity>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("TrilumeCandlesContext") ?? throw new InvalidOperationException("Connection string 'TrilumeCandlesIdentityConnection' not found.")));
+
+            builder.Services.AddDefaultIdentity<TrilumeCandlesUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<TrilumeCandlesIdentity>();
+
 
             // Add services to the container.
             builder.Services.AddControllers().AddJsonOptions(options =>
