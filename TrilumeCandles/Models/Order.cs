@@ -12,13 +12,9 @@ namespace TrilumeCandles.Models
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         [Required]
-        public OrderStatus Status { get; set; } = OrderStatus.Pending;
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
         [Required]
-        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
-        [Required]
-        public string PaymentIntentId { get; set; }
-        [Required]
-        public string ShippingAddress { get; set; }
+        public ShippingAddress ShippingAddressId { get; set; }
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Total must be greater than zero.")]
         public decimal Total { get; set; }
