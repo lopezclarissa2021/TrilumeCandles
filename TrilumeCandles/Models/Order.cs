@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrilumeCandles.Models
 {
@@ -8,7 +9,8 @@ namespace TrilumeCandles.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string UserId { get; set; }
+        [ForeignKey("Customer")]
+        public int CustomerId { get; set; }
         [Required]
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         [Required]
