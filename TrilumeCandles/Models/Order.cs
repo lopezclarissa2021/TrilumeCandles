@@ -7,7 +7,7 @@ namespace TrilumeCandles.Models
         [Key]
         public int Id { get; set; }
         public string UserId { get; set; }
-        public string OrderStatus { get; set; }
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
         public string ShippingAddress { get; set; }
         public decimal Total { get; set; }
         public DateTime OrderDate { get; set; }
