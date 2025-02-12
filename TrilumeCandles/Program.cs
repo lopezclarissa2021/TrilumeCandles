@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
-using TrilumeCandles.Data;
-using Microsoft.AspNetCore.Identity;
 using TrilumeCandles.Areas.Identity.Data;
+using TrilumeCandles.Data;
 
 namespace TrilumeCandles
 {
