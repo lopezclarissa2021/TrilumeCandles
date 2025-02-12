@@ -27,14 +27,20 @@ namespace TrilumeCandles
                 options.JsonSerializerOptions.WriteIndented = true;
             });
 
-            builder.Services.AddOpenApi();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "TrilumeCandles API v1");
+                    options.RoutePrefix = string.Empty; // Set Swagger UI as the default page
+                });
             }
 
             app.UseHttpsRedirection();
@@ -43,6 +49,7 @@ namespace TrilumeCandles
 
 
             app.MapControllers();
+            app.MapFallbackToFile("/index.html");
 
             app.Run();
         }
